@@ -16,6 +16,7 @@ import com.uxpsystems.assignment.entity.User;
 import com.uxpsystems.assignment.exceptions.UserNotFoundException;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -46,6 +47,7 @@ public class UserServiceImpl implements UserService {
 		
 	//String password = 	BCrypt.hashpw(user.getPassword(),  BCrypt.gensalt());
 	//user.setPassword(password);
+		
 	 logger.info("action=addUser status=start");
 			
 	 User savedUser = userRepository.save(modelMapper.map(user,User.class));
@@ -56,7 +58,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
 	public void updateUser(User user) {
 		 logger.info("action=updateUser status=start ");
 		 User tempUser = userRepository.findById(user.getId()).orElseThrow(
@@ -66,8 +67,8 @@ public class UserServiceImpl implements UserService {
 				});
 	
 		 userRepository.updateUser(user.getId(), user.getUserName(), user.getPassword(), user.getStatus());
-		 User savedUser =userRepository.findById(user.getId()).get();
-		 logger.info("action=updateUser status=finished id={}",savedUser.getId());		
+		 userRepository.flush();
+		 logger.info("action=updateUser status=finished id={}",user.getId());		
 	
 	}
 

@@ -14,8 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.uxpsystems.assignment.Status;
-
 @Entity
 @Table(name = "employee")
 public class User {

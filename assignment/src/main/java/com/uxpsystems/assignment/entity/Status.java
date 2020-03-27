@@ -1,4 +1,4 @@
-package com.uxpsystems.assignment;
+package com.uxpsystems.assignment.entity;
 
 public enum Status {
 

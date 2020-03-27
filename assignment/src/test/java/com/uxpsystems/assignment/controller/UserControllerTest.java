@@ -23,9 +23,9 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.uxpsystems.assignment.Status;
 import com.uxpsystems.assignment.dto.UserDTO;
 import com.uxpsystems.assignment.dto.UserResource;
+import com.uxpsystems.assignment.entity.Status;
 import com.uxpsystems.assignment.entity.User;
 import com.uxpsystems.assignment.service.UserServiceImpl;
 

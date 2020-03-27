@@ -14,10 +14,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.modelmapper.ModelMapper;
 
-import com.uxpsystems.assignment.Status;
 import com.uxpsystems.assignment.dao.UserRepository;
 import com.uxpsystems.assignment.dto.UserDTO;
 import com.uxpsystems.assignment.dto.UserResource;
+import com.uxpsystems.assignment.entity.Status;
 import com.uxpsystems.assignment.entity.User;
 import com.uxpsystems.assignment.exceptions.UserNotFoundException;
 
