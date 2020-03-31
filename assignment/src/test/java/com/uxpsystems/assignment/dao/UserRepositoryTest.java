@@ -28,8 +28,6 @@ import com.uxpsystems.assignment.entity.User;
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 public class UserRepositoryTest {
 	
-	@Autowired
-	private TestEntityManager entityManager;
 	 
 	 @Autowired 
 	 private UserRepository repository;
@@ -42,9 +40,9 @@ public class UserRepositoryTest {
 	 
 	 	@Test
 	    public void should_find_user_by_id() {
-		  User user = repository.save(new User(1L, "TestUser1", "password", Status.ACTIVATED));
+		  User user = repository.save(new User( "TestUser1", "password", Status.ACTIVATED));
 	
-		  Optional<User> savedUser = repository.findById(1L);
+		  Optional<User> savedUser = repository.findById(user.getId());
 
 	        assertTrue(savedUser.isPresent());
 	     	assertSame(savedUser.get(), user);
@@ -53,9 +51,9 @@ public class UserRepositoryTest {
 	 	
 	 	@Test
 	 	public void should_save_user(){
-	 		 User user = repository.save(new User(1L, "TestUser1", "password", Status.ACTIVATED));
+	 		 User user = repository.save(new User("TestUser1", "password", Status.ACTIVATED));
 	 		 
-	 		assertThat(user).hasFieldOrPropertyWithValue("id", 1L);
+	 		assertThat(user).hasFieldOrPropertyWithValue("id", user.getId());
 	        assertThat(user).hasFieldOrPropertyWithValue("userName", "TestUser1");
 	        assertThat(user).hasFieldOrPropertyWithValue("password", "password");
 	        assertThat(user).hasFieldOrPropertyWithValue("status", Status.ACTIVATED);
@@ -66,16 +64,16 @@ public class UserRepositoryTest {
 	 	
 		@Test
 	 	public void should_update_user(){
-	 		 User user = repository.save(new User(1L, "TestUser1", "password", Status.ACTIVATED));
+	 		 User user = repository.save(new User("TestUser1", "password", Status.ACTIVATED));
 	 		 
 	 		 
-	 		 repository.updateUser(1L, "TestUser1", "password", Status.DEACTIVATED);
+	 		 repository.updateUser(user.getId(), "TestUser1", "password", Status.DEACTIVATED);
 
 	 		
-	 		Optional<User> savedUser = repository.findById(1L);
+	 		Optional<User> savedUser = repository.findById(user.getId());
 
 	 		
-	 		assertThat(savedUser.get()).hasFieldOrPropertyWithValue("id", 1L);
+	 		assertThat(savedUser.get()).hasFieldOrPropertyWithValue("id", user.getId());
 	        assertThat(savedUser.get()).hasFieldOrPropertyWithValue("userName", "TestUser1");
 	        assertThat(savedUser.get()).hasFieldOrPropertyWithValue("password", "password");
 	        assertThat(savedUser.get()).hasFieldOrPropertyWithValue("status", Status.DEACTIVATED);
@@ -85,11 +83,11 @@ public class UserRepositoryTest {
 	 	
 			@Test
 		 	public void should_delete_user(){
-		 		 User user = repository.save(new User(1L, "TestUser1", "password", Status.ACTIVATED));
+		 		 User user = repository.save(new User( "TestUser1", "password", Status.ACTIVATED));
 		 		 
-		 		 repository.deleteById(1L);
+		 		 repository.deleteById(user.getId());
 		 		 
-		 		 Optional<User> user1 = repository.findById(1L);
+		 		 Optional<User> user1 = repository.findById(user.getId());
 			      
 		 		assertThat(user1).isEmpty();
 		 		

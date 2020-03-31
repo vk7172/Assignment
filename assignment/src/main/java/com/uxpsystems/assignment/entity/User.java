@@ -1,5 +1,6 @@
 package com.uxpsystems.assignment.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,9 +15,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "employee")
-public class User {
+public class User implements Serializable{
 	
 	private long id;
 	private String userName;
@@ -32,6 +38,13 @@ public class User {
 	public User(long id, String userName, String password, Status status) {
 		
 		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.setStatus(status);
+	}
+	public User( String userName, String password, Status status) {
+		
+
 		this.userName = userName;
 		this.password = password;
 		this.setStatus(status);
